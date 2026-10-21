@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nikita Khvatkin Petrovsky</title>
+<meta name="description" content="Predoctoral researcher at UNED, Madrid. Radiation transport and machine learning for fusion facilities.">
+<meta property="og:title" content="Nikita Khvatkin Petrovsky">
+<meta property="og:description" content="Predoctoral researcher at UNED, Madrid. Radiation transport and machine learning for fusion facilities.">
+<meta property="og:image" content="https://khvatkinnikita.github.io/website/photo.jpg">
+<meta property="og:url" content="https://khvatkinnikita.github.io/website/">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><circle cx='32' cy='32' r='32' fill='%2301533f'/><text x='32' y='42' font-size='26' font-family='Georgia,serif' text-anchor='middle' fill='white'>NK</text></svg>">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#timeline">Timeline</a></li>
+    <li><a href="cv.html">CV</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<main>
+
+<section id="about">
+  <div class="intro">
+    <img src="photo.jpg" alt="Photo of Nikita Khvatkin Petrovsky">
+    <div>
+      <h1>Nikita Khvatkin Petrovsky</h1>
+      <p class="role">Predoctoral researcher at UNED, Madrid</p>
+      <ul class="links">
+        <li><a href="mailto:nikita@ind.uned.es">Email</a></li>
+        <li><a href="https://www.linkedin.com/in/nikita-khvatkin-petrovsky/">LinkedIn</a></li>
+        <li><a href="https://github.com/KhvatkinNikita">GitHub</a></li>
+        <li><a href="cv.pdf">CV (PDF)</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <p>I am a predoctoral researcher in the TECF3IR group of the Department of Energy Engineering at UNED, in Madrid. I work on radiation transport and shielding for fusion facilities. My tools are Monte Carlo transport codes, such as MCNP and OpenMC, and neural networks trained on their results.</p>
+
+  <p>My PhD, supervised by Rafael Juárez Mañas and Pablo Martínez Albertos, continues the development of NACARTE. NACARTE estimates the photon dose rate in real time, directly on the CAD model of a facility, to support the design of the ITER Hot Cell Complex.</p>
+
+  <p>I studied Energy Engineering and the Master in Nuclear Science and Technology at the Universidad Politécnica de Madrid. Before the PhD, I worked at HI Iberia on neural networks that predict the results of Monte Carlo neutron transport simulations of IFMIF-DONES. I am also studying Physics and the Master in Computational Neutronics at UNED, part time.</p>
+</section>
+
+<section id="research">
+  <h2>Research</h2>
+
+  <h3>NACARTE: dose rates on CAD in real time</h3>
+  <p>Radiation maps of ITER are computed with Monte Carlo codes such as MCNP, and each new configuration takes hours to days of computing. During design the geometry and the sources change often, so this cost limits how many options can be checked. The point-kernel method is much faster. It computes the uncollided photon flux along a straight line from the source to each point, and multiplies it by a build-up factor that accounts for the scattered photons. Tabulated build-up factors assume an infinite homogeneous medium, so they are inaccurate in finite rooms with multilayer walls.</p>
+
+  <p>NACARTE (Neural-network Assisted CAd-based Real-Time dose Estimator) is a CAD add-in first developed at UNED by Mario Belotti for Ansys SpaceClaim, and now migrated to Ansys Discovery. It applies the point-kernel method directly on the CAD geometry. Ray tracing on the GPU gives the uncollided flux and a neural network gives the build-up factor, so a dose map is ready in seconds.</p>
+
+  <p>The original network only reads the source and the shielding wall, so it cannot see the rest of the room. In my doctoral research work, NACART²E, rays are cast from the centre of every voxel of the tally mesh. For each solid they cross, they record the entry distance, the perpendicular thickness, the material and the surface normal. Four networks that read this description were compared with MCNP and with the original network: a 3D convolutional network and three neural operators (FNO, DeepONet and MIONet). The selected model is a MIONet whose geometry branch is a 3D convolutional network. In the thesis database the column standing in the room never moves, so the database cannot tell a memorised position from a learned rule. The next step is a larger database with an obstacle of random shape, position and material in every room.</p>
+
+  <h3>Surrogate models for IFMIF-DONES</h3>
+  <p>At HI Iberia (2024–2025), within the DONES-FLUX project, I trained neural networks on Monte Carlo simulations of IFMIF-DONES. They predict the neutron flux, the damage energy, the hydrogen and helium production and the heating from the shape of the deuteron beam footprint. The networks are differentiable, so the beam parameters can be optimised by gradient descent.</p>
+
+  <h3>Neutron fluence in Watts Bar Unit 1</h3>
+  <p>At the Universidad Politécnica de Madrid (2023–2024) I modelled the core of the TVA Watts Bar Unit 1 reactor with OpenMC. I set up a method to compute the neutron fluence in the extended beltline of the reactor vessel, the region above and below the core where the inlet and outlet nozzles are. This work was also my master's thesis.</p>
+
+  <h3>Publications</h3>
+
+  <h4>Journal article</h4>
+  <ol class="pubs">
+    <li><span class="title">Differentiable Deep Learning Surrogate Models Applied to the Optimization of the IFMIF-DONES Facility</span>
+      <span>G. Gallardo Romero, G. Rodríguez-Llorente, L. Magariños Rodríguez, R. Morant Navascués, <b>N. Khvatkin Petrovsky</b>, R. Lorenzo Ortega, R. Gómez-Espinosa Martín</span>
+      <span class="venue"><em>Particles</em> 8 (2025) 21. <a href="https://doi.org/10.3390/particles8010021">doi:10.3390/particles8010021</a></span></li>
+  </ol>
+
+  <h4>Theses</h4>
+  <ol class="pubs">
+    <li><span class="title">NACART²E: Neural Network assisted CAD-based Real Time Dose Estimator with Augmented Geometrical Information via Ray Tracing</span>
+      <span class="venue">Doctoral research work (Trabajo de Investigación de Doctorado), UNED, Madrid, September 2026. Tutors: R. Juárez Mañas and J. Alguacil Orejudo.</span></li>
+    <li><span class="title">Modelling of TVA Watts Bar Unit 1 nuclear power plant with the Monte Carlo code OpenMC</span>
+      <span class="venue">Master's thesis, Universidad Politécnica de Madrid, February 2024. Supervisor: E. Castro González.</span></li>
+  </ol>
+
+  <h4>Conference contributions</h4>
+  <ol class="pubs">
+    <li><span class="title">Accelerating and Optimizing Neutronic Simulations with Differentiable Neural Operator-based Surrogate Models</span>
+      <span class="venue">Talk, Fusion Neutronics Meeting 2025: ITER and beyond, UNED, Madrid, 7–10 April 2025.</span></li>
+    <li><span class="title">Deep Learning Surrogate Models for Neutronic Irradiation Optimisation in IFMIF-DONES</span>
+      <span><b>N. Khvatkin Petrovsky</b>, L. Magariños Rodríguez, G. Rodríguez Llorente, R. Morant Navascués, G. Gallardo Romero, R. Lorenzo Ortega, R. Gómez-Espinosa Martín</span>
+      <span class="venue">Poster, FISA 2025 &amp; EURADWASTE '25, Warsaw, 12–16 May 2025.</span></li>
+    <li><span class="title" lang="es">Aplicación de modelos subrogados con aprendizaje profundo para simulación neutrónica - proyecto DONES-FLUX</span>
+      <span><b>N. Khvatkin Petrovsky</b>, L. Magariños Rodríguez, R. Morant Navascués, G. Rodríguez Llorente, R. Gómez-Espinosa Martín</span>
+      <span class="venue">Talk, 50th Annual Meeting of the Spanish Nuclear Society (SNE), Córdoba, 9–11 October 2024. Presented in the session on advanced reactors and nuclear fusion, and again in the young researchers' session.</span></li>
+  </ol>
+</section>
+
+<section id="timeline">
+  <h2>Timeline</h2>
+  <ol class="timeline">
+    <li><span class="date">Autumn 2026</span>
+      <p><span class="tag">Education</span>Started the Master in Computational Neutronics at UNED, part time.</p></li>
+    <li><span class="date">Sep 2026</span>
+      <p><span class="tag">Thesis</span>Finished my doctoral research work, NACART²E, at UNED.</p></li>
+    <li><span class="date">Jun 2026</span>
+      <p><span class="tag">Conference</span>2nd Fusion Neutronics Meeting at KIT, Germany. Co-author of a talk on the group's work for ITER, and participant in the OpenMC workshop.</p></li>
+    <li><span class="date">Early 2026</span>
+      <p><span class="tag">Education</span>Started the Bachelor's Degree in Physics at UNED, part time.</p></li>
+    <li><span class="date">Nov 2025</span>
+      <p><span class="tag">Position</span>Joined the TECF3IR group at UNED as a predoctoral researcher. Started the PhD on NACARTE and the training in ITER nuclear analysis.</p></li>
+    <li><span class="date">Jun 2025</span>
+      <p><span class="tag">Course</span>Introduction to Fusion Energy and Plasma Physics, Princeton Plasma Physics Laboratory.</p></li>
+    <li><span class="date">May 2025</span>
+      <p><span class="tag">Poster</span>FISA 2025 &amp; EURADWASTE '25, Warsaw. Deep learning surrogate models for IFMIF-DONES.</p></li>
+    <li><span class="date">Apr 2025</span>
+      <p><span class="tag">Talk</span>Fusion Neutronics Meeting 2025: ITER and beyond, Madrid. Differentiable surrogate models for neutronic simulations.</p></li>
+    <li><span class="date">Feb 2025</span>
+      <p><span class="tag">Paper</span>Article in <em>Particles</em> on differentiable surrogate models for the optimisation of IFMIF-DONES.</p></li>
+    <li><span class="date">Oct 2024</span>
+      <p><span class="tag">Talk</span>50th Annual Meeting of the Spanish Nuclear Society, Córdoba. The DONES-FLUX surrogate models, presented in two sessions.</p></li>
+    <li><span class="date">Apr 2024</span>
+      <p><span class="tag">Position</span>AI Engineer at HI Iberia. Surrogate models and multi-objective optimisation for IFMIF-DONES.</p></li>
+    <li><span class="date">Feb 2024</span>
+      <p><span class="tag">Thesis</span>Master's thesis at UPM on Watts Bar Unit 1 with OpenMC.</p></li>
+    <li><span class="date">Jul 2023</span>
+      <p><span class="tag">Position</span>Research assistant at UPM. Neutron fluence on the reactor vessel of Watts Bar Unit 1.</p></li>
+    <li><span class="date">2022</span>
+      <p><span class="tag">Education</span>Started the Master in Nuclear Science and Technology at UPM.</p></li>
+    <li><span class="date">Apr 2022</span>
+      <p><span class="tag">Position</span>Simulation and modelling intern at Tecnatom. Thermal-hydraulic models of nuclear power plants.</p></li>
+    <li><span class="date">2017</span>
+      <p><span class="tag">Education</span>Started the Bachelor's Degree in Energy Engineering at UPM.</p></li>
+  </ol>
+</section>
+
+<section id="contact">
+  <h2>Contact</h2>
+  <p>Email: <a href="mailto:nikita@ind.uned.es">nikita@ind.uned.es</a><br>
+    LinkedIn: <a href="https://www.linkedin.com/in/nikita-khvatkin-petrovsky/">linkedin.com/in/nikita-khvatkin-petrovsky</a><br>
+    GitHub: <a href="https://github.com/KhvatkinNikita">github.com/KhvatkinNikita</a></p>
+  <p>TECF3IR group, Department of Energy Engineering<br>
+    Escuela Técnica Superior de Ingenieros Industriales, UNED<br>
+    Madrid, Spain</p>
+</section>
+
+</main>
+
+<footer>© 2026 Nikita Khvatkin Petrovsky</footer>
+
+</body>
+</html>
